@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Question, Developer, Choice
 
 
@@ -8,7 +8,7 @@ def index(request):
     context = {
         'developers': developers,
     }
-    return render(request, 'index.html', context=context)
+    return render(request, 'main/index.html', context=context)
 
 
 def form(request):
@@ -17,10 +17,10 @@ def form(request):
     context = {
         'questions': questions,
     }
-    return render(request, 'form.html', context)
+    return render(request, 'main/form.html', context)
 
 
-def result(request):
+def submit(request):
     
     # 문항 수
     N = Question.objects.count()
@@ -45,4 +45,11 @@ def result(request):
         'counter': counter
     }
     
-    return render(request, 'result.html', context)
+    return redirect('main:result', developer_id=best_developer_id)
+
+def result(request, developer_id):
+    developer = Developer.objects.get(pk=developer_id)
+    context = {
+        'developer' : developer,
+    }
+    return render(request, 'main/result.html', context=context)

@@ -1,19 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% extends 'main/base.html' %} {% load static %} {% block head %}
     <link rel="stylesheet" href="{% static 'style/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'style/form.css' %}" />
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <title>나의 개발 유형 찾기</title>
-  </head>
-  <body>
+   
+{% endblock head %} {% block body %}
     <section id="survey">
       <div class="wrapper">
-        <form id="form" action="/result/" method="post">
+        <form id="form" action="{% url 'main:submit' %}" method="post">
           {% csrf_token %} {% for question in questions %}
           <div class="test">
             <div class="question_container">
@@ -54,6 +46,8 @@
         </form>
       </div>
     </section>
-    <script src="{% static 'js/form.js' %}"></script>
-  </body>
-</html>
+{% endblock body%}
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="{% static 'js/form.js' %}"></script>
+{% endblock js %}
