@@ -1,4 +1,7 @@
-{% extends 'main/base.html' %} {% load static %} {% block head %}
+{% extends 'main/base.html' %} 
+{% load static %} 
+
+{% block head %}
 <meta property="og:title" content="나의 개발 유형은?" />
 <meta property="og:image" content="" />
 <meta property="og:url" content="" />
@@ -6,9 +9,12 @@
   property="og:description"
   content="나에게 꼭 맞는 개발 유형은 무엇일까?"
 />
-<link rel="stylesheet" href="{% static 'style/result.css'%}" />
+<link rel="stylesheet" href="{% static 'style/reset.css' %}" />
+<link rel="stylesheet" href="{% static 'style/result.css'%}?v=1.0" />
 
-{% endblock head %} {% block body %}
+{% endblock head %} 
+
+{% block body %}
 <section id="main_contents">
   <div class="wrapper">
     <div class="result">
@@ -37,14 +43,16 @@
           {% endfor %}
         </ul>
       </div>
-      <div class="explain">그래서 어떤 언어부터 공부해야 할까?</h3>
+      <div class="explain">
+        <h3 class="title">그래서 어떤 언어부터 공부해야 할까?</h3>
         <ul class="language_lists">
           {% for language in developer.data.languages.list %}
-          <li><div class="img_wrap">
-            <img src="{% static ''%}{{language.img}}" alt="{{language.name}}" width="200px">
-          </div>
-         <h3>{{language.name}}</h3>
-        </li>
+          <li>
+            <div class="img_wrap">
+              <img src="{% static ''%}{{language.img}}" alt="{{language.name}}" width="200px">
+            </div>
+            <h3>{{language.name}}</h3>
+          </li>
           {% endfor %}
         </ul>
         {% if data.languages.comments %}
